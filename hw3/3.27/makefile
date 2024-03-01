@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall 
+CFLAGS = -Wall -lrt
 
 filecopy: filecopy.c
 	$(CC) $(CFLAGS) -o filecopy filecopy.c

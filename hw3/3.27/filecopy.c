@@ -4,6 +4,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include <sys/stat.h>
+#include <linux/stat.h>
 
 #define BUFFER_SIZE 4096
 
@@ -38,7 +40,7 @@ int main(int argc, char *argv[]) {
     // Child and parent process code
     if (pid == 0) { // Child process
         close(pipefd[1]); // Close write end of pipe
-        destFile = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        destFile = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC | S_IRUSR | S_IWUSR, 0644);
         if (destFile == -1) {
             perror("open");
             exit(1);
